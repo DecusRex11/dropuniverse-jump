@@ -1,12 +1,15 @@
 import { Boot } from './scenes/Boot.js';
-import { Preloader } from './scenes/Preloader.js';
 import { Game } from './scenes/Game.js';
 import { GameOver } from './scenes/GameOver.js';
+import { Preloader } from './scenes/Preloader.js';
+
+// Importa firebase.js desde la carpeta src
+import * as firebaseUtils from './firebase.js'; // Puedes eliminar esto si ya no lo usas directamente aquí
 
 const config = {
     type: Phaser.AUTO,
-    width: 1920,
-    height: 1080,
+    width: 720, // Resolución vertical típica para móvil
+    height: 1280,
     parent: 'game-container',
     backgroundColor: '#028af8',
     physics: {
@@ -18,14 +21,11 @@ const config = {
     },
     scale: {
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH
-    },
-    dom: {
-        createContainer: true   // <- MUY IMPORTANTE para inputs DOM
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 720,
+        height: 1280
     },
     scene: [Boot, Preloader, Game, GameOver]
 };
 
-window.onload = () => {
-    new Phaser.Game(config);
-};
+new Phaser.Game(config);
